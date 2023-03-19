@@ -31,7 +31,10 @@ this.productAddForm = this.formBuilder.group({
     let productModel = Object.assign({},this.productAddForm.value ) 
     this.productService.add(productModel).subscribe(response=>{
       console.log(response)
-      this.toastrService.success("Ürün eklendi.", "Başarılı")
+      this.toastrService.success(response.message, "Başarılı")
+    }, responseError=>{
+      console.log(responseError.error)
+      this.toastrService.error(responseError.error)
     })
    
     }else{
