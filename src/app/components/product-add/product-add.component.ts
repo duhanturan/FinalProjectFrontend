@@ -34,7 +34,7 @@ this.productAddForm = this.formBuilder.group({
       this.toastrService.success(response.message, "Başarılı")
     }, responseError=>{
       console.log(responseError.error)
-      this.toastrService.error(responseError.error)
+      this.toastrService.error(responseError)
     })
    
     }else{
