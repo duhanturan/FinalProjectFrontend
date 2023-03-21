@@ -30,11 +30,17 @@ this.productAddForm = this.formBuilder.group({
     if(this.productAddForm.valid){
     let productModel = Object.assign({},this.productAddForm.value ) 
     this.productService.add(productModel).subscribe(response=>{
-      console.log(response)
+      
       this.toastrService.success(response.message, "Başarılı")
     }, responseError=>{
-      console.log(responseError.error)
-      this.toastrService.error(responseError)
+      if (responseError.error.Errors.length>0){
+        
+        for (let i = 0; i < responseError.error.Errors.length; i++) {
+          this.toastrService.error(responseError.error.Errors[i].ErrorMessage, "Doğrulama Hatası");
+        }
+        
+      }
+      
     })
    
     }else{
